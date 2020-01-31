@@ -72,7 +72,7 @@ namespace YearBookViewer.pages
 
         private void LoadFiles(string dir, TreeNode td)
         {
-            string[] Files = Directory.GetFiles(dir, "*.*");
+            string[] Files = Directory.GetFiles(dir, "*.jpg");
 
             // Loop through them to see files  
             foreach (string file in Files)
@@ -82,6 +82,21 @@ namespace YearBookViewer.pages
                 tds.Tag = fi.FullName;
                 tds.StateImageIndex = 1;
                 UpdateProgress();
+
+
+                string folder = Path.GetFileName(Path.GetDirectoryName(file));
+                string folder1 = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(file)));
+
+                TreeNode node = treeView2.Nodes.Cast<TreeNode>().Where(c => c.Text == ((folder1 == "" ? "" : folder1 + " - "))  + folder).FirstOrDefault();
+
+                if (node == null)
+                {
+                    TreeNode newNode = treeView2.Nodes.Add(((folder1 == "" ? "" : folder1 + " - ")) + folder);
+                    newNode.Tag = Path.GetDirectoryName(file);
+                    newNode.Nodes.Add(fi.Name).Tag = fi.FullName;
+                }
+                else
+                    node.Nodes.Add(fi.Name).Tag = fi.FullName;
 
             }
         }
@@ -95,6 +110,19 @@ namespace YearBookViewer.pages
                 progressBar1.CreateGraphics().DrawString(percent.ToString() + "%", new Font("Arial", (float)8.25, FontStyle.Regular), Brushes.Black, new PointF(progressBar1.Width / 2 - 10, progressBar1.Height / 2 - 7));
 
                 Application.DoEvents();
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GetFileGroupings()
+        {
+            foreach (TreeNode tn in treeView1.Nodes)
+            {
+
             }
         }
     }

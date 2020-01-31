@@ -34,12 +34,15 @@
             this.vsMainContainer = new YearBookViewer.ViewStack();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblSourceDocumentPath = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.vsMainContainer.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -107,6 +110,9 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.treeView2);
             this.panel3.Controls.Add(this.progressBar1);
             this.panel3.Controls.Add(this.treeView1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -115,6 +121,23 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(20);
             this.panel3.Size = new System.Drawing.Size(1138, 665);
             this.panel3.TabIndex = 4;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.progressBar1.Location = new System.Drawing.Point(23, 619);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(350, 23);
+            this.progressBar1.TabIndex = 1;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeView1.Location = new System.Drawing.Point(23, 23);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(350, 590);
+            this.treeView1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -160,22 +183,35 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // treeView1
+            // treeView2
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.treeView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeView1.Location = new System.Drawing.Point(23, 23);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(350, 590);
-            this.treeView1.TabIndex = 0;
+            this.treeView2.Location = new System.Drawing.Point(379, 23);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.Size = new System.Drawing.Size(343, 590);
+            this.treeView2.TabIndex = 2;
             // 
-            // progressBar1
+            // button1
             // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.progressBar1.Location = new System.Drawing.Point(23, 619);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(350, 23);
-            this.progressBar1.TabIndex = 1;
+            this.button1.Location = new System.Drawing.Point(379, 619);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox1.Location = new System.Drawing.Point(728, 23);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.textBox1.Size = new System.Drawing.Size(331, 590);
+            this.textBox1.TabIndex = 4;
             // 
             // Dashboard
             // 
@@ -193,6 +229,7 @@
             this.vsMainContainer.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -213,5 +250,8 @@
         private System.Windows.Forms.Label lblSourceDocumentPath;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

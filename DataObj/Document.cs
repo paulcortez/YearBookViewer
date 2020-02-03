@@ -12,6 +12,7 @@ namespace YearBookViewer.DataObj
         [BsonId]
         public int Id { get; set; }
         public string DocumentTitle { get; set; }
+        public string FolderDescription { get; set; }
         public string DocumentFolderPath { get; set; }
         public int TotalPages { get; set; }
         public List<DocumentPages> DocPages { get; set; }

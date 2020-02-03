@@ -166,13 +166,27 @@ namespace YearBookViewer.pages
             foreach(TreeNode tn in treeView2.Nodes)
             {
                 int page = 1;
+                DataObj.Document doc = new DataObj.Document();
+                List<DataObj.DocumentPages> documentPages = new List<DataObj.DocumentPages>();
 
-                txtReadLog.AppendText("Creating document " + tn.Text.ToString() + Environment.NewLine);
+                txtReadLog.AppendText("Creating document " + tn.Text + Environment.NewLine);
+
+                string[] textFiles = Directory.GetFiles(tn.Tag.ToString(), "*.txt");
+
+                doc.DocumentTitle = tn.Text;
+                doc.FolderDescription = "";
+                
+                foreach (string textFile in textFiles)
+                    doc.FolderDescription += File.ReadAllText(textFile) + Environment.NewLine;
+                
+                doc.DocumentFolderPath = tn.Tag.ToString();
 
                 foreach (TreeNode tn1 in tn.Nodes)
                 {
                     txtReadLog.AppendText("\t Reading page " + page.ToString() + Environment.NewLine);
                 }
+
+                doc.TotalPages = page;
 
                 txtReadLog.AppendText("saving all as single document " + tn.Text.ToString() + Environment.NewLine);
             }

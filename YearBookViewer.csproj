@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObj\AppSetting.cs" />
-    <Compile Include="DataObj\DocPage.cs" />
     <Compile Include="DataObj\Document.cs" />
     <Compile Include="DataObj\FileAndDirectory.cs" />
     <Compile Include="DataObj\DocumentPages.cs" />

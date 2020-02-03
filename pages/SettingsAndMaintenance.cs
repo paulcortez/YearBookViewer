@@ -164,9 +164,11 @@ namespace YearBookViewer.pages
 
         private void btnStartReading_Click(object sender, EventArgs e)
         {
+            TesseractEngine ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube);
+
             foreach(TreeNode tn in treeView2.Nodes)
             {
-                int page = 1;
+                int pageNo = 1;
                 DataObj.Document doc = new DataObj.Document();
                 List<DataObj.DocumentPages> documentPages = new List<DataObj.DocumentPages>();
 
@@ -174,6 +176,7 @@ namespace YearBookViewer.pages
 
                 string[] textFiles = Directory.GetFiles(tn.Tag.ToString(), "*.txt");
 
+                doc.Id = LiteDB.ObjectId.NewObjectId();
                 doc.DocumentTitle = tn.Text;
                 doc.FolderDescription = "";
                 
@@ -184,22 +187,35 @@ namespace YearBookViewer.pages
 
                 foreach (TreeNode tn1 in tn.Nodes)
                 {
-                    txtReadLog.AppendText("\t Reading page " + page.ToString() + Environment.NewLine);
+                    txtReadLog.AppendText("\t Reading page " + pageNo.ToString() + Environment.NewLine);
 
-                    string ocrText = "";
                     Bitmap documentImage = new Bitmap(Image.FromFile(tn1.Tag.ToString()));
+                    Page page = ocr.Process(documentImage);
 
                     DataObj.DocumentPages documentPage = new DataObj.DocumentPages()
                     {
-                        Content = ocrText,
-
+                        Content = page.GetText(),
+                        ThumbImg = DataObj.DocumentPages.ConvertImageToByte(documentImage, DataObj.DocumentPages.ImageResize(documentImage.Size, true, 100)),
+                        ImageId = String.Format("$/{0}/img{1}", tn.Text, tn1.Text),
+                        ParentDocument = doc.Id,
+                        DateAdded = DateTime.Now,
+                        DateEdited = DateTime.Now
                     };
 
+                    if (DataObj.DocumentPages.InsertUpdateDocument(documentPage))
+                    {
+                        documentPages.Add(documentPage);
+                        pageNo++;
+                    }
                 }
 
-                doc.TotalPages = page;
+                doc.TotalPages = pageNo;
+                doc.DocPages = documentPages;
 
-                txtReadLog.AppendText("saving all as single document " + tn.Text.ToString() + Environment.NewLine);
+                if(DataObj.Document.InsertUpdateDocument(doc))
+                {
+                    txtReadLog.AppendText("Document " + tn.Text.ToString() + " added with " + doc.TotalPages + " total pages" + Environment.NewLine);
+                }
             }
         }
     }

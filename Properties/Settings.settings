@@ -8,5 +8,8 @@
     <Setting Name="DataFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">data.ybv</Value>
     </Setting>
+    <Setting Name="ImageStorage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">imgstore.ybv</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

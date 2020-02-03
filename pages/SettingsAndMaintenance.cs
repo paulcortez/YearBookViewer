@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Tesseract;
 
 namespace YearBookViewer.pages
 {
@@ -184,6 +185,16 @@ namespace YearBookViewer.pages
                 foreach (TreeNode tn1 in tn.Nodes)
                 {
                     txtReadLog.AppendText("\t Reading page " + page.ToString() + Environment.NewLine);
+
+                    string ocrText = "";
+                    Bitmap documentImage = new Bitmap(Image.FromFile(tn1.Tag.ToString()));
+
+                    DataObj.DocumentPages documentPage = new DataObj.DocumentPages()
+                    {
+                        Content = ocrText,
+
+                    };
+
                 }
 
                 doc.TotalPages = page;

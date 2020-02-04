@@ -35,12 +35,15 @@ namespace YearBookViewer.pages
         {
             DirectoryInfo di = new DirectoryInfo(Dir);
             //Setting ProgressBar Maximum Value  
-            progressBar1.Maximum = Directory.GetFiles(Dir, "*.jpg", SearchOption.AllDirectories).Length + Directory.GetDirectories(Dir, "**", SearchOption.AllDirectories).Length;
+            int totalFiles = Directory.GetFiles(Dir, "*.jpg", SearchOption.AllDirectories).Length;
+            progressBar1.Maximum = totalFiles + Directory.GetDirectories(Dir, "**", SearchOption.AllDirectories).Length;
             TreeNode tds = treeView1.Nodes.Add(di.Name);
             tds.Tag = di.FullName;
             tds.StateImageIndex = 0;
             LoadSubDirectories(Dir, tds);
             LoadFiles(Dir, tds);
+
+            label5.Text = totalFiles.ToString();
         }
 
         private void LoadSubDirectories(string dir, TreeNode td)
@@ -164,7 +167,8 @@ namespace YearBookViewer.pages
 
         private void btnStartReading_Click(object sender, EventArgs e)
         {
-            TesseractEngine ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube);
+            
+            int fileCount = 1;
 
             foreach(TreeNode tn in treeView2.Nodes)
             {
@@ -190,23 +194,42 @@ namespace YearBookViewer.pages
                     txtReadLog.AppendText("\t Reading page " + pageNo.ToString() + Environment.NewLine);
 
                     Bitmap documentImage = new Bitmap(Image.FromFile(tn1.Tag.ToString()));
-                    Page page = ocr.Process(documentImage);
+                    Page page;
+                    string content = "";
+
+                    using(TesseractEngine ocr = new TesseractEngine("./tessdata", "eng", EngineMode.TesseractAndCube))
+                    {
+                        page = ocr.Process(documentImage);
+                        content = page.GetText();
+                    }
 
                     DataObj.DocumentPages documentPage = new DataObj.DocumentPages()
                     {
-                        Content = page.GetText(),
-                        ThumbImg = DataObj.DocumentPages.ConvertImageToByte(documentImage, DataObj.DocumentPages.ImageResize(documentImage.Size, true, 100)),
+                        DocFilename = tn1.Text,
+                        DocPath = tn1.Tag.ToString(),
+                        Content = content,
+                        ThumbImg = DataObj.DocumentPages.ConvertImageToByte(new Bitmap(documentImage), DataObj.DocumentPages.ImageResize(documentImage.Size, true, 100)),
                         ImageId = String.Format("$/{0}/img{1}", tn.Text, tn1.Text),
                         ParentDocument = doc.Id,
                         DateAdded = DateTime.Now,
                         DateEdited = DateTime.Now
                     };
 
-                    if (DataObj.DocumentPages.InsertUpdateDocument(documentPage))
+                    if (DataObj.DocumentFileHandler.AddNewImageDocument(new DataObj.DocumentFileHandler()
                     {
-                        documentPages.Add(documentPage);
-                        pageNo++;
+                        Id = documentPage.ImageId,
+                        FileName = documentPage.DocFilename,
+                        ImageBmp = new Bitmap(documentImage)
+                    }))
+                    {
+                        if (DataObj.DocumentPages.InsertUpdateDocument(documentPage))
+                        {
+                            documentPages.Add(documentPage);
+                            pageNo++;
+                        }
                     }
+
+                    fileCount++;
                 }
 
                 doc.TotalPages = pageNo;
@@ -217,6 +240,8 @@ namespace YearBookViewer.pages
                     txtReadLog.AppendText("Document " + tn.Text.ToString() + " added with " + doc.TotalPages + " total pages" + Environment.NewLine);
                 }
             }
+
+            label6.Text = fileCount.ToString();
         }
     }
 }

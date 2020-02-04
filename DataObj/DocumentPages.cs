@@ -13,6 +13,8 @@ namespace YearBookViewer.DataObj
     {
         [BsonId]
         public int Id { get; set; }
+        public string DocFilename { get; set; }
+        public string DocPath { get; set; }
         public string Content { get; set; }
         public byte[] ThumbImg { get; set; }
         public int Page { get; set; }

@@ -53,6 +53,8 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblSourceDocumentPath = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.vsMainContainer.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -227,6 +229,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label6);
+            this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.txtReadLog);
             this.panel4.Controls.Add(this.btnStartReading);
             this.panel4.Controls.Add(this.button2);
@@ -333,6 +337,24 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Files From Source Document";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(379, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 15);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "label5";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(725, 34);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 15);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "label6";
+            // 
             // SettingsAndMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -388,5 +410,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnStartReading;
         private System.Windows.Forms.TextBox txtReadLog;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

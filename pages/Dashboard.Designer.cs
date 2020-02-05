@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.flpDocumentList = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.vsMainContainer = new YearBookViewer.ViewStack();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.flpDocumentPages = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
-            this.vsMainContainer.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(87)))), ((int)(((byte)(151)))));
-            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.flpDocumentList);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -50,17 +51,17 @@
             this.panel1.Size = new System.Drawing.Size(220, 768);
             this.panel1.TabIndex = 2;
             // 
-            // linkLabel1
+            // flpDocumentList
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.linkLabel1.LinkColor = System.Drawing.Color.White;
-            this.linkLabel1.Location = new System.Drawing.Point(25, 70);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(98, 15);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Document Status";
+            this.flpDocumentList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpDocumentList.AutoScroll = true;
+            this.flpDocumentList.AutoScrollMargin = new System.Drawing.Size(0, 20);
+            this.flpDocumentList.Location = new System.Drawing.Point(3, 73);
+            this.flpDocumentList.Name = "flpDocumentList";
+            this.flpDocumentList.Size = new System.Drawing.Size(214, 692);
+            this.flpDocumentList.TabIndex = 1;
             // 
             // label1
             // 
@@ -74,42 +75,54 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Dashboard";
             // 
-            // vsMainContainer
+            // panel2
             // 
-            this.vsMainContainer.Controls.Add(this.tabPage1);
-            this.vsMainContainer.Controls.Add(this.tabPage2);
-            this.vsMainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vsMainContainer.Location = new System.Drawing.Point(220, 0);
-            this.vsMainContainer.Name = "vsMainContainer";
-            this.vsMainContainer.SelectedIndex = 0;
-            this.vsMainContainer.Size = new System.Drawing.Size(1146, 768);
-            this.vsMainContainer.TabIndex = 3;
+            this.panel2.Controls.Add(this.btnSearch);
+            this.panel2.Controls.Add(this.txtSearch);
+            this.panel2.Controls.Add(this.flpDocumentPages);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(220, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(20);
+            this.panel2.Size = new System.Drawing.Size(1146, 768);
+            this.panel2.TabIndex = 3;
             // 
-            // tabPage1
+            // btnSearch
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1138, 740);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(1048, 43);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // tabPage2
+            // txtSearch
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1138, 740);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Location = new System.Drawing.Point(33, 44);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(1009, 23);
+            this.txtSearch.TabIndex = 1;
+            // 
+            // flpDocumentPages
+            // 
+            this.flpDocumentPages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpDocumentPages.Location = new System.Drawing.Point(33, 73);
+            this.flpDocumentPages.Name = "flpDocumentPages";
+            this.flpDocumentPages.Size = new System.Drawing.Size(1090, 672);
+            this.flpDocumentPages.TabIndex = 0;
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.vsMainContainer);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Dashboard";
@@ -117,18 +130,19 @@
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.vsMainContainer.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private ViewStack vsMainContainer;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.FlowLayoutPanel flpDocumentList;
+        private System.Windows.Forms.FlowLayoutPanel flpDocumentPages;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

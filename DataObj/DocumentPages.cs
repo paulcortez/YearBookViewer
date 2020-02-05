@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,22 @@ namespace YearBookViewer.DataObj
             }
 
             return doc;
+        }
+
+        public static List<DocumentPages> GetDocumentContainsInContent(string keyword)
+        {
+            List<DocumentPages> docList = new List<DocumentPages>();
+
+            using (var db = new LiteDatabase(DataLocation))
+            {
+                var col = db.GetCollection<DocumentPages>(CollectionName);
+
+                //docList = col.Find(c=>c.Content.ToLower().Contains(keyword.ToLower())).ToList();
+                docList = col.Find(Query.Contains("Content", keyword)).ToList();
+                //docList = col.Find(c => CultureInfo.CurrentCulture.CompareInfo.IndexOf(c.Content, keyword, CompareOptions.IgnoreCase) >= 0).ToList();
+            }
+
+            return docList;
         }
 
         public static bool InsertUpdateDocument(DocumentPages documentPages)

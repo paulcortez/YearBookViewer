@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Tesseract;
+using System.Text.RegularExpressions;
 
 namespace YearBookViewer.pages
 {
@@ -203,13 +204,17 @@ namespace YearBookViewer.pages
                         content = page.GetText();
                     }
 
+                    Regex nonAlphaNumeric = new Regex("[^a-zA-Z0-9]");
+
                     DataObj.DocumentPages documentPage = new DataObj.DocumentPages()
                     {
+                        
                         DocFilename = tn1.Text,
                         DocPath = tn1.Tag.ToString(),
                         Content = content,
-                        ThumbImg = DataObj.DocumentPages.ConvertImageToByte(new Bitmap(documentImage), DataObj.DocumentPages.ImageResize(documentImage.Size, true, 100)),
-                        ImageId = String.Format("$/{0}/img{1}", tn.Text, tn1.Text),
+                        ThumbImg = DataObj.DocumentPages.ConvertImageToByte(new Bitmap(documentImage), DataObj.DocumentPages.ImageResize(documentImage.Size, true, 200)),
+                        Page = pageNo,
+                        ImageId = String.Format("$/{0}/img{1}{2}", doc.Id, pageNo, nonAlphaNumeric.Replace(tn1.Text.Replace(".jpg", ""), "")),
                         ParentDocument = doc.Id,
                         DateAdded = DateTime.Now,
                         DateEdited = DateTime.Now

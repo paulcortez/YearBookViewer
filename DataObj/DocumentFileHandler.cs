@@ -47,7 +47,7 @@ namespace YearBookViewer.DataObj
                     db.FileStorage.Upload(docFileHandler.Id, docFileHandler.FileName, ms);
                     success = true;
                 }
-                catch (Exception) { }
+                catch (Exception e) { throw new Exception("Add new image error.", e); }
             }
 
             return success;

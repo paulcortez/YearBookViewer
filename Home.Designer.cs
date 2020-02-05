@@ -88,7 +88,7 @@
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.Image = global::YearBookViewer.Properties.Resources.House48;
-            this.btnHome.Location = new System.Drawing.Point(1086, 10);
+            this.btnHome.Location = new System.Drawing.Point(1143, 9);
             this.btnHome.Margin = new System.Windows.Forms.Padding(0);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(50, 50);
@@ -104,12 +104,13 @@
             this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Image = global::YearBookViewer.Properties.Resources.Search;
-            this.btnSearch.Location = new System.Drawing.Point(1143, 9);
+            this.btnSearch.Location = new System.Drawing.Point(1093, 9);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(50, 50);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Visible = false;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // btnSettings

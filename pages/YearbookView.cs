@@ -16,20 +16,49 @@ namespace YearBookViewer.pages
         private Point scrollPosition;
         private Size OriginalSize;
 
+        private List<DataObj.DocumentPages> documentPages = new List<DataObj.DocumentPages>();
+        private int currentPage = 0;
+
 
         public YearbookView()
         {
             InitializeComponent();
         }
 
+        public YearbookView(LiteDB.ObjectId documentId, int pageNo = 1)
+        {
+            InitializeComponent();
+
+            documentPages = DataObj.Document.GetDocumentById(documentId).DocPages;
+            currentPage = pageNo;
+
+            if (pageNo == 1)
+                btnSlideLeft.Enabled = false;
+            
+            if(documentPages.Count == 1)
+            {
+                btnSlideLeft.Enabled = false;
+                btnSlideRight.Enabled = false;
+            }
+        }
+
+
+        private void LoadYearBookView()
+        {
+            if (currentPage >= 0 && currentPage <= documentPages.Count)
+            {
+                Image img = DataObj.DocumentFileHandler.GetImageDocumentById(documentPages.Where(c => c.Page == currentPage).SingleOrDefault().ImageId);
+
+                imgContainer.Image = img;
+                imgContainer.Size = img.Size;
+                OriginalSize = img.Size;
+            }
+        }
+
 
         private void YearbookView_Load(object sender, EventArgs e)
         {
-            Image img = Image.FromFile(@"C:\Users\paul\Pictures\56184176_417009035749531_6089027164773023744_n.jpg");
-            imgContainer.Image = img;
-            imgContainer.Size = img.Size;
-            OriginalSize = img.Size;
-
+            LoadYearBookView();
         }
 
         private void ImgContainer_MouseDown(object sender, MouseEventArgs e)
@@ -64,12 +93,30 @@ namespace YearBookViewer.pages
 
         private void BtnSlideLeft_Click(object sender, EventArgs e)
         {
+            currentPage--;
+            LoadYearBookView();
 
+            btnSlideRight.Enabled = true;
+            btnSlideLeft.Enabled = true;
+
+            if (currentPage == 1)
+                btnSlideLeft.Enabled = false;
+
+            
         }
 
         private void BtnSlideRight_Click(object sender, EventArgs e)
         {
+            currentPage++;
+            LoadYearBookView();
 
+            btnSlideRight.Enabled = true;
+            btnSlideLeft.Enabled = true;
+
+            if (currentPage == documentPages.Count)
+                btnSlideRight.Enabled = false;
+
+            
         }
 
         private void TbImageZoom_Scroll(object sender, EventArgs e)

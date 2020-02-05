@@ -46,7 +46,9 @@ namespace YearBookViewer.pages
                     LinkColor = Color.White,
                     LinkBehavior = LinkBehavior.HoverUnderline,
                     Width = flpDocumentList.Width - 25,
-                    Tag = document.DocPages
+                    Height = 32,
+                    Tag = document.DocPages,
+                    Font = new Font("Segoe UI", 12F)
                 };
 
                 linkLabel.Click += LinkLabel_Click;
